@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factorial", "Factorial\Fact
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calc", "Calc\Calc.csproj", "{AB861089-C268-4B7D-A5CB-22FA91140BE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcExpression", "CalcExpression\CalcExpression.csproj", "{D759412D-79A4-4E3A-8B4A-29C08A856EA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{AB861089-C268-4B7D-A5CB-22FA91140BE7}.Release|x64.Build.0 = Release|Any CPU
 		{AB861089-C268-4B7D-A5CB-22FA91140BE7}.Release|x86.ActiveCfg = Release|Any CPU
 		{AB861089-C268-4B7D-A5CB-22FA91140BE7}.Release|x86.Build.0 = Release|Any CPU
+		{D759412D-79A4-4E3A-8B4A-29C08A856EA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D759412D-79A4-4E3A-8B4A-29C08A856EA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D759412D-79A4-4E3A-8B4A-29C08A856EA8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D759412D-79A4-4E3A-8B4A-29C08A856EA8}.Debug|x64.Build.0 = Debug|Any CPU
+		{D759412D-79A4-4E3A-8B4A-29C08A856EA8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D759412D-79A4-4E3A-8B4A-29C08A856EA8}.Debug|x86.Build.0 = Debug|Any CPU
+		{D759412D-79A4-4E3A-8B4A-29C08A856EA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D759412D-79A4-4E3A-8B4A-29C08A856EA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D759412D-79A4-4E3A-8B4A-29C08A856EA8}.Release|x64.ActiveCfg = Release|Any CPU
+		{D759412D-79A4-4E3A-8B4A-29C08A856EA8}.Release|x64.Build.0 = Release|Any CPU
+		{D759412D-79A4-4E3A-8B4A-29C08A856EA8}.Release|x86.ActiveCfg = Release|Any CPU
+		{D759412D-79A4-4E3A-8B4A-29C08A856EA8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
