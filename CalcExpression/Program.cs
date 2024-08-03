@@ -55,13 +55,13 @@ namespace CalcExpression
 				{
 					//если неможет преобразовать строку в число
 					Console.WriteLine("Неправильный формат чисел. Попробуйте еще раз.");
-					numbers = new string[0]; // сброс массива для повторения цикла
+					numbers = new string[0]; 
 				}
 				catch (Exception ex)
 				{
 					//Все остальные исключения
 					Console.WriteLine($"Произошла ошибка: {ex.Message}. Попробуйте еще раз.");
-					numbers = new string[0]; // сброс массива для повторения цикла
+					numbers = new string[0];
 				}
 			} while (numbers.Length != 2);
 		}
