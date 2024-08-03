@@ -16,10 +16,23 @@ namespace CalcExpression2
 		{
 			//Console.Write("Введите простое арифметическое выражение: ");
 			//string expression = Console.ReadLine();
-			string expression = "22+33-8*4*7/8";
+			string expression = "-22+33-8*4*7/8";
+			string SubExpresion="";
+			int index = 0;
+			if(expression[0]=='-')
+			{ 
+				index = 1;
+				SubExpresion= expression.Substring(1);
+				expression = SubExpresion;
+			}
 			string[] numbers= expression.Split('+', '-', '*', '/');
+			if (index == 1)
+			{
+				numbers[0] = "-"+numbers[0];
+			}
 			List<char> operators = new List<char>();
 			bool flag = false;
+
 			foreach (var item in expression)
 			{
 				if (isOperators(item))
