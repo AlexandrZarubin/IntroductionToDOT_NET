@@ -16,13 +16,14 @@ namespace CalcExpression2
 		{
 			//Console.Write("Введите простое арифметическое выражение: ");
 			//string expression = Console.ReadLine();
-			string expression = "-22+33-8*4*7/8";
+			string expression = "-22+33-8*4+7/8+9-2+3*5+6*9*2";
 			string SubExpresion="";
 			int index = 0;
-			if(expression[0]=='-')
+			bool flagOperand = true;
+			if (expression[0]=='-')
 			{ 
 				index = 1;
-				SubExpresion= expression.Substring(1);
+				SubExpresion= expression.Substring(1);//создаем строку без первого элемента 
 				expression = SubExpresion;
 			}
 			string[] numbers= expression.Split('+', '-', '*', '/');
@@ -37,76 +38,80 @@ namespace CalcExpression2
 			{
 				if (isOperators(item))
 				{
-					operators.Add(item);
+					operators.Add(item);// добавление в list
 				}
 			}
 			double result = 0;
 			while (operators.Count>0)
 			{
-				for (int i = 0; i < operators.Count; i++)
+				foreach (var item in operators)
 				{
-					//foreach (var item in operators)
-					//{
-					//	if (item == '*' || item == '/') flagOperand = true;
-					//	else
-					//	{
-					//		flagOperand = false;
-					//	}
-					//}
-					if (operators[i] == '*' || operators[i] == '/')
-					{
-						double leftOperand = double.Parse(numbers[i]);
-						double rightOperand = double.Parse(numbers[i + 1]);
-						// result = 0;
-						if (operators[i] == '*')
-						{
-							result = leftOperand * rightOperand;
-						}
-						else if (operators[i] == '/')
-						{
-							result = leftOperand/rightOperand ;
-						}
-						flag = true;
-					}
-					
-					if (flag == true)
-					{
-						numbers[i] = result.ToString();
-						List<string> list = new List<string>(numbers);
-						list.Remove(numbers[i + 1]);
-						numbers = list.ToArray();
-						list = null;
-						operators.RemoveAt(i);
-						flag = false;
-						i--;
-					}
+					if (item == '*' || item == '/') flagOperand = true;
 				}
-				for (int i = 0; i < operators.Count;)
+				if (flagOperand == true)
+				{
+					for (int i = 0; i < operators.Count; i++)
 					{
-					if (operators[i] == '+' || operators[i] == '-')
-					{
-						double leftOperand = double.Parse(numbers[i]);
-						double rightOperand = double.Parse(numbers[i + 1]);
-						//result = 0;
-						if (operators[i] == '+')
+						
+						if (operators[i] == '*' || operators[i] == '/')
 						{
-							result = leftOperand + rightOperand;
+							double leftOperand = double.Parse(numbers[i]);
+							double rightOperand = double.Parse(numbers[i + 1]);
+							// result = 0;
+							if (operators[i] == '*')
+							{
+								result = leftOperand * rightOperand;
+							}
+							else if (operators[i] == '/')
+							{
+								result = leftOperand / rightOperand;
+							}
+							flag = true;
 						}
-						else if (operators[i] == '-')
-						{
-							result = leftOperand - rightOperand;
-						}
-						flag = true;
+
 						if (flag == true)
 						{
 							numbers[i] = result.ToString();
 							List<string> list = new List<string>(numbers);
-							list.Remove(numbers[i + 1]);
-							numbers = list.ToArray();
+							list.Remove(numbers[i + 1]);//удаление элемента
+							numbers = list.ToArray();//list в массив
 							list = null;
-							operators.RemoveAt(i);
+							operators.RemoveAt(i);//удаление элемента
 							flag = false;
-							
+							i--;
+						}
+						flagOperand = false;
+						continue;
+					}
+				}
+				else {
+					for (int i = 0; i < operators.Count;)
+					{
+						if (operators[i] == '+' || operators[i] == '-')
+						{
+							double leftOperand = double.Parse(numbers[i]);
+							double rightOperand = double.Parse(numbers[i + 1]);
+							//result = 0;
+							if (operators[i] == '+')
+							{
+								result = leftOperand + rightOperand;
+							}
+							else if (operators[i] == '-')
+							{
+								result = leftOperand - rightOperand;
+							}
+							flag = true;
+							if (flag == true)
+							{
+								numbers[i] = result.ToString();
+								List<string> list = new List<string>(numbers);
+								list.Remove(numbers[i + 1]);
+								numbers = list.ToArray();
+								list = null;
+								operators.RemoveAt(i);
+								flag = false;
+
+							}
 						}
 					}
 				}
