@@ -1,5 +1,5 @@
 ﻿//#define CONSTRUCTORS_CHECK
-//#define ARITHMETICAL_OPERATORS
+#define ARITHMETICAL_OPERATORS
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +30,24 @@ namespace Fraction
 			A.Print();
 			B.Print();
 			C.Print();
-			(A / B).Print(); 
+			(A / B).Print();
+			Console.Write("+++:\t"); (A+B).Print();
 #endif
 			Console.WriteLine(new Fraction(1, 2) == new Fraction(5, 11));
 			Console.WriteLine(2 == 3);
-		}
+			Fraction D=A++;
+			A.Print();
+			//++A;
+			//A.Print();
+			Fraction E = new Fraction(2.75);
+			E.Print();  // Вывод: 2(750/1000)
+			Fraction F = new Fraction(B -A );
+            Console.WriteLine("A-B");
+            F.Print();
+            Console.WriteLine(A > B);
+			A++;
+            Console.WriteLine("A++");
+            A.Print();
+        }
 	}
 }

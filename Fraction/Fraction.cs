@@ -51,7 +51,15 @@ namespace Fraction
 			this.Numeration = other.Numeration;
 			this.Denominator = other.Denominator;
 		}
-
+		public Fraction(double value)
+		{
+			value += 1e-10;
+			Integer = (int)value;
+			denominator = (int)1e+9;
+			value -= Integer;
+			Numeration = (int)(value * denominator);
+			reduce();
+		}
 		~Fraction() { Console.WriteLine($"Destructor: {this.GetHashCode()}"); }
 		//				Arithmetical operators:
 		public static Fraction operator *(Fraction left, Fraction right)
@@ -83,6 +91,24 @@ namespace Fraction
 		{
 			return left * right.Inverted();
 		}
+		// Перегрузка оператора +
+		public static Fraction operator +(Fraction left, Fraction right)
+		{
+			return new Fraction
+			(
+				left.ToImProper().Numeration * right.Denominator + right.ToImProper().Numeration * left.Denominator,
+				left.Denominator * right.Denominator
+			).ToProper();
+		}
+		// Перегрузка оператора -
+		public static Fraction operator -(Fraction left, Fraction right)
+		{
+			return new Fraction
+			(
+				left.ToImProper().Numeration * right.Denominator - right.ToImProper().Numeration * left.Denominator,
+				left.Denominator * right.Denominator
+			).ToProper();
+		}
 		public static bool operator ==(Fraction left, Fraction right)
 		{
 			return left.ToImProper().Numeration * right.ToImProper().Denominator == right.ToImProper().Numeration * left.ToImProper().Denominator;
@@ -92,17 +118,73 @@ namespace Fraction
 		{
 			return !(left == right);
 		}
+
+		// Перегрузка оператора <
+		public static bool operator <(Fraction left, Fraction right)
+		{
+			return left.ToImProper().Numeration * right.Denominator < right.ToImProper().Numeration * left.Denominator;
+		}
+		// Перегрузка оператора >
+		public static bool operator >(Fraction left, Fraction right)
+		{
+			return left.ToImProper().Numeration * right.Denominator > right.ToImProper().Numeration * left.Denominator;
+		}
+		// Перегрузка оператора <=
+		public static bool operator <=(Fraction left, Fraction right)
+		{
+			return !(left > right);
+		}
+		// Перегрузка оператора >=
+		public static bool operator >=(Fraction left, Fraction right)
+		{
+			return !(left < right);
+		}
+
+		// Префиксный инкремент
+		public static Fraction operator ++(Fraction fraction)
+		{
+			fraction.Integer++;
+			return fraction;
+		}
+		//// Постфиксный инкремент
+		//public static Fraction operator ++(Fraction fraction, int unused)
+		//{
+
+		//	Fraction temp = new Fraction(fraction);  // Сохраняем текущее состояние
+		//	fraction.Integer++;
+		//	return temp;  // Возвращаем старое значение
+		//}
+
+		// Префиксный декремент
+		public static Fraction operator --(Fraction fraction)
+		{
+			fraction.Integer--;
+			return fraction;
+		}
+		//// Постфиксный декремент
+		//public static Fraction operator --(Fraction fraction, int unused)
+		//{
+		//	Fraction temp = new Fraction(fraction);  // Сохраняем текущее состояние
+		//	fraction.Integer--;
+		//	return temp;  // Возвращаем старое значение
+		//}
+
 		public Fraction ToProper()
 		{
 			//int rest = Numeration / Denominator;
 			//Integer += rest;
 			//Numeration %= Denominator;
 			//return this;
-			Fraction proper = new Fraction();
+
+			/*Fraction proper = new Fraction();
 			proper.Integer += Numeration / Denominator;
 			proper.Numeration = Numeration % Denominator;
 			proper.Denominator = Denominator;
-			return proper;
+			return proper;*/
+			return new Fraction(
+				Integer += Numeration / Denominator,
+				Numeration = Numeration % Denominator,
+				Denominator = Denominator);
 		}
 		public Fraction ToImProper()
 		{
@@ -135,5 +217,22 @@ namespace Fraction
 			else if(Integer==0) Console.Write(0);
             Console.WriteLine();
         }
+		Fraction reduce()
+		{
+			//https://www.webmath.ru/poleznoe/formules_12_7.php
+			int more, less, rest;
+			if (Numeration > denominator) { more = Numeration; less = denominator; }
+			else { less = Numeration; more = denominator; }
+			do
+			{
+				rest = more % less;
+				more = less;
+				less = rest;
+			} while (rest!=0);
+			int GCD = more; //Greatest Common Divisor
+			Numeration /= GCD;
+			denominator /= GCD;
+			return this;
+		}
 	}
 }
